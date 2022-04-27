@@ -1,4 +1,8 @@
-env
-output
+/env
+
+# production
+/build
+
+# system config
 config.json
 mpbse.ifp
