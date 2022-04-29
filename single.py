@@ -46,6 +46,10 @@ def f_10(rollno, appno):
                 res_ = 'पूरक'
             elif 'failed' in Result.lower():
                 res_ = 'उनुत्तीर्ण'
+            elif 'absent' in Result.lower():
+                res_ = 'अनुपस्थित'
+            else:
+                res_ = None
             srow.append(res_)
 
             for i in range(1, 13, 2):
@@ -64,17 +68,19 @@ def f_10(rollno, appno):
             grand_total = tables[10].find_all("strong")[6].string[-7:]
             srow.append(grand_total)
 
-            percentage = format(eval(grand_total)*100, ".2f")
+            m, t = grand_total.split('/')
+            percentage = format((int(m)/int(t))*100, ".2f")
             srow.append(percentage)
 
             break
         except Exception as e:
-            print("refetch:", e)
-            if 'list index out of range' in str(e) or 'zeros' in str(e):
+            print("issue:", e)
+            if 'list index out of range' in str(e):
                 relst = []
                 for i in range(0, len(FIELD_NAMES)):
                     relst.append(None)
                 return relst
+            print("refetch...")
 
     return srow
 
@@ -121,6 +127,8 @@ def f_12(rollno, appno):
                 res_ = 'पूरक'
             elif 'failed' in Result.lower():
                 res_ = 'उनुत्तीर्ण'
+            elif 'absent' in Result.lower():
+                res_ = 'अनुपस्थित'
             else:
                 res_ = None
             srow.append(res_)
@@ -146,17 +154,19 @@ def f_12(rollno, appno):
             grand_total = tables[10].find_all("strong")[6].string[-7:]
             srow.append(grand_total)
 
-            percentage = format(eval(grand_total)*100, ".2f")
+            m, t = grand_total.split('/')
+            percentage = format((int(m)/int(t))*100, ".2f")
             srow.append(percentage)
 
             break
         except Exception as e:
-            print("refetch:", e)
+            print("issue:", e)
             if 'list index out of range' in str(e):
                 relst = []
                 for i in range(0, len(FIELD_NAMES)):
                     relst.append(None)
                 return relst
+            print("refetch...")
 
     return srow
 
