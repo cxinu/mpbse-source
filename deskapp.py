@@ -47,12 +47,14 @@ def find_chrome_win():
 
     return chrome_path
 
+
 def get_default_chrome_path():
     if sys.platform in ['win32', 'win64']:
         return find_chrome_win()
 
 
 current_timestamp = None
+
 
 class FlaskUI:
 
@@ -252,7 +254,7 @@ class FlaskUI:
                              current_timestamp).total_seconds()
             self.lock.release()
 
-            print("Idle:", delta_seconds)
+            # print("Idle:", delta_seconds)
             if delta_seconds > self.idle_interval:
                 logging.info("App To be closed")
                 break
